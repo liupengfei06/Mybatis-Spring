@@ -4,6 +4,8 @@
 
 #Spring4.1.2.RELEASE
 
+#MySql读写主从数据源
+
 项目使用Spring4.1.2.RELEASE+SpringMVC4.1.2.RELEASE+Mybatis3.2.8
 
 项目集成了Mybatis分页插件和通用Mapper插件
