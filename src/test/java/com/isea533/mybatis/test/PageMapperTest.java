@@ -24,11 +24,8 @@
 
 package com.isea533.mybatis.test;
 
-import tk.mybatis.mapper.entity.Example;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.isea533.mybatis.mapper.CountryMapper;
 import com.isea533.mybatis.model.Country;
+import com.isea533.mybatis.service.DemoService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -40,15 +37,17 @@ import java.util.List;
 public class PageMapperTest extends BasicTest {
 
     @Autowired
-    private CountryMapper countryMapper;
+    private DemoService demoService;
 
     @Test
     public void test(){
-        Example example = new Example(Country.class);
-        example.createCriteria().andGreaterThan("id",100);
-        PageHelper.startPage(2,10);
-        List<Country> countries = countryMapper.selectByExample(example);
-        PageInfo<Country> pageInfo = new PageInfo<Country>(countries);
-        System.out.println(pageInfo.getTotal());
+        List<Country> countryList = demoService.selectPage(1, 10);
+        System.out.println(countryList.size());
+        Country country = new Country();
+        country.setId(10086);
+        country.setCountrycode("CN");
+        country.setCountryname("中文");
+        int result = demoService.save(country);
+        System.out.println(result);
     }
 }
